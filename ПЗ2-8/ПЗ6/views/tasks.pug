@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1.app-title= title
+
+  form#addTaskForm.task-form
+    input#taskTitle.task-input(
+      type="text"
+      name="title"
+      placeholder="Введіть назву нової задачі (від 3 до 100 символів)..."
+      autocomplete="off"
+    )
+    button.btn-add(type="submit") Додати
+
+  ul#taskList.task-list
+    each task in tasks
+      li.task-item(data-id=task.id class=task.completed ? 'completed' : '')
+        span.task-text= task.title
+        .task-actions
+          button.btn-toggle(type="button" data-id=task.id data-completed=task.completed ? 'true' : 'false')
+            = task.completed ? 'Відновити' : 'Виконано'
+          button.btn-delete(type="button" data-id=task.id) Видалити
